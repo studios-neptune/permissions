@@ -1,0 +1,20 @@
+name: Code Style
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:7.4.0
+
+    steps:
+     - uses: actions/checkout@v2
+
+     - name: Check Coding Standards
+       run: composer lint

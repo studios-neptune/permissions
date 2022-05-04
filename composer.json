@@ -1,0 +1,52 @@
+{
+  "name": "studios-neptune/permisisions",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Babacar Cissé DIA",
+      "email": "bcdbuddy@outlook.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "illuminate/support": "^7.0|^8.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.5|^9.3.3",
+    "orchestra/testbench": "^6.13"
+  },
+  "autoload": {
+    "psr-4": {
+      "Neptune\\Domains\\Permissions\\": "src/",
+      "Neptune\\Domains\\Permissions\\Database\\Factories\\": "database/factories/",
+      "Neptune\\Domains\\Permissions\\Tests\\": "tests/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "lint": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run",
+    "lint:fix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix",
+    "test": "./vendor/bin/phpunit"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Neptune\\Domains\\Permissions\\Providers\\PermissionsServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "7.4.11"
+    },
+    "preferred-install": "dist",
+    "minimum-stability": "dev",
+    "process-timeout": 0,
+    "sort-packages": true,
+    "prefer-stable": true
+  }
+}
