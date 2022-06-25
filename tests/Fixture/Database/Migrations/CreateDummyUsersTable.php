@@ -8,11 +8,11 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDummyUsersTable extends Migration
 {
-  /**
-   * Run the migrations.
-   *
-   * @return void
-   */
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         if (Schema::hasTable('dummy_users')) {

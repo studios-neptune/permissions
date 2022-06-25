@@ -13,10 +13,13 @@ use Neptune\Domains\Permissions\Database\Factories\PermissionFactory;
  * @property int id
  * @property string name
  * @property string slug
+ * @property string group
  */
 class Permission extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 
     public $timestamps = false;
 

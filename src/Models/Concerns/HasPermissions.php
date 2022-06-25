@@ -11,18 +11,28 @@ trait HasPermissions
 {
     public function getPermissions()
     {
-        return $this->permissions_meta;
+        return collect(
+            json_decode($this->getAttribute('permissions_meta'), true)
+        );
+        // getPermissionsViaRoles
 //    $permissions = new Collection();
 //    $this->getRoles()->each(function ($role) use (&$permissions) {
 //      $permissions = $permissions->merge($role->permissions);
 //    });
-//    $permissions = $allPermissionKeys->intersect($permissions);
+
+      // getAllPermissions = getPermissions + getPermissionsViaRoles
+    }
+
+    public function permissions()
+    {
+        $Permission = config('neptune-permissions.models.permission');
+
+        return $Permission::whereIn('slug', $this->getPermissions());
     }
 
     public function hasPermission(string $permission): bool
     {
-        return collect($this->getPermissions())
-            ->has($permission);
+        return in_array($permission, $this->getPermissions()->toArray());
     }
 
     public function hasAllPermissions(array $permissions): bool
@@ -50,7 +60,7 @@ trait HasPermissions
     public function addPermissions(array $permissions)
     {
         $this->update([
-            'permissions_meta' => collect($this->getPermissions())->merge($permissions)->values(),
+            'permissions_meta' => $this->getPermissions()->merge($permissions)->values(),
         ]);
     }
 }
