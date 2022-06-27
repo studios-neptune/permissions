@@ -1,14 +1,15 @@
 @props([
 'action',
+'permissions',
 'method' => 'POST',
 'role' => null,
 ])
 
 <form
-        action="{{ $action }}"
-        method="{{ $method === 'GET' ? 'GET' : 'POST' }}"
-        role="form"
-        {{ $attributes }}
+    action="{{ $action }}"
+    method="{{ $method === 'GET' ? 'GET' : 'POST' }}"
+    role="form"
+    {{ $attributes }}
 >
     @csrf
 
@@ -28,11 +29,10 @@
         :value="old('slug', data_get($role, 'slug'))"
     ></x-input.text>
 
-    <x-input.textarea
-        :label="__('role.permissions')"
-        name="permissions"
-        :value="old('permissions', $role->getPermissions())"
-    ></x-input.textarea>
+    <x-cerberus::permission.group.form
+        :permissions="$permissions"
+        :entity="$role"
+    ></x-cerberus::permission.group.form>
 
     <div class="form__actions">
         <x-button.primary>Save</x-button.primary>

@@ -26,6 +26,10 @@ return [
                 'update' => \Neptune\Domains\Permissions\Requests\Entity\Role\UpdateRequest::class,
             ],
         ],
+        'role' => [
+            'update' => \Neptune\Domains\Permissions\Requests\Role\UpdateRequest::class,
+            'store' => \Neptune\Domains\Permissions\Requests\Role\StoreRequest::class,
+        ],
     ],
     'has_roles' => true,
     'permissions_table' => 'permissions',

@@ -12,9 +12,19 @@ trait HasPermissions
     }
     public function getPermissions()
     {
-        return collect(
+        $permissions = collect(
             json_decode($this->getAttribute($this->getPermissionField()), true)
         );
+
+        if ($this instanceof \Neptune\Domains\Permissions\Contracts\Models\HasRoles) {
+            $permissions = $this->roles()->get()->reduce(function ($carry, $role) {
+                $carry = $carry->merge($role->getPermissions());
+
+                return $carry;
+            }, $permissions);
+        }
+
+        return $permissions;
         // getPermissionsViaRoles
 //    $permissions = new Collection();
 //    $this->getRoles()->each(function ($role) use (&$permissions) {
