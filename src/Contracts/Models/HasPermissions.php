@@ -4,6 +4,8 @@ namespace Neptune\Domains\Permissions\Contracts\Models;
 
 interface HasPermissions
 {
+    public function getPermissionField(): string;
+
     public function getPermissions();
 
     public function permissions();
@@ -15,4 +17,8 @@ interface HasPermissions
     public function hasAnyPermissions(array $permissions): bool;
 
     public function addPermissions(array $permissions);
+
+    public function removePermissions(array $permissions);
+
+    public function syncPermissions(array $permissions);
 }

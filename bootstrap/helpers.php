@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Support\Str;
+
 if (! function_exists('crud_permissions')) {
-    function crud_permissions($prefix)
+    function crud_permissions($prefix): array
     {
         return [
             "${prefix}_create" => "Can create ${$prefix}",
@@ -11,5 +13,16 @@ if (! function_exists('crud_permissions')) {
             "${prefix}_view" => "Can view ${$prefix}",
             // TODO: think about adding update_own, update_any, delete_own, delete_any
         ];
+    }
+}
+
+if (! function_exists('model_name')) {
+    function model_name($model): string
+    {
+        return basename(
+            Str::of($model)
+            ->replace('\\', '/')
+            ->lower()
+        );
     }
 }

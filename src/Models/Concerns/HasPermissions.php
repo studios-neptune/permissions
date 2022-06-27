@@ -4,15 +4,16 @@ namespace Neptune\Domains\Permissions\Models\Concerns;
 
 use Illuminate\Support\Collection;
 
-// TODO add interface
-// addPermissions
-// removePermissions
 trait HasPermissions
 {
+    public function getPermissionField(): string
+    {
+        return 'permissions_meta';
+    }
     public function getPermissions()
     {
         return collect(
-            json_decode($this->getAttribute('permissions_meta'), true)
+            json_decode($this->getAttribute($this->getPermissionField()), true)
         );
         // getPermissionsViaRoles
 //    $permissions = new Collection();
@@ -59,8 +60,25 @@ trait HasPermissions
 
     public function addPermissions(array $permissions)
     {
-        $this->update([
-            'permissions_meta' => $this->getPermissions()->merge($permissions)->values(),
+        $this->forceFill([
+            $this->getPermissionField() => $this->getPermissions()->merge($permissions)->values(),
         ]);
+        $this->save();
+    }
+
+    public function removePermissions(array $permissions)
+    {
+        $this->forceFill([
+            $this->getPermissionField() => $this->getPermissions()->filter(fn ($p) => ! in_array($p, $permissions))->values(),
+        ]);
+        $this->save();
+    }
+
+    public function syncPermissions(array $permissions)
+    {
+        $this->forceFill([
+            $this->getPermissionField() => $permissions,
+        ]);
+        $this->save();
     }
 }

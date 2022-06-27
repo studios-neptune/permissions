@@ -1,38 +1,29 @@
-.pp--permission__list {
+.pp--role__list {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
-    @include for-tablet {
+    @include for-desktop-up {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-.pp--permission {
+.pp--role {
     @extend %lineCard;
+    min-height: 5rem;
 }
 
-.pp--permission--flat {
-    padding: 0;
-    margin: 0;
-    min-height: auto;
-}
-
-.pp--permission__name {
+.pp--role__name {
     font-weight: bold;
     margin: 0;
     padding: .5rem 0;
 }
 
-.pp--permission__directory__items {
-    flex: 1;
-}
-
-.pp--permission__header {
+.pp--role__header {
     display: flex;
     align-items: center;
 }
 
-.pp--permission__list {
+.pp--role__list {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
@@ -44,7 +35,7 @@
     }
 }
 
-.pp--permission__item__slug {
+.pp--role__item__slug {
     color: var(--primary-color);
     border-radius: 0.4rem;
     font-weight: bold;
@@ -65,30 +56,25 @@
     padding-top: .5rem;
 }
 
-
-.pp--card {
-    background-color: var(--surface2-light);
-    padding: .5rem;
-    margin-bottom: 1rem;
-    border-radius: .4rem;
-}
-.pp--card__center {
-    text-align: center;
-}
-
-.pp--permission__item__name {
+.pp--role__item__name {
     height: 1.5rem;
 }
 
-.pp--permission--form {
+.pp--role--form {
     min-height: auto;
 }
 
-.pp--permission--form .pp--permission__item__name {
+.pp--roles {
+    @extend %lineCard;
+    min-height: auto;
+}
+
+.pp--role--form .pp--role__item__name,
+.pp--roles .pp--role__item__name {
     display: inline;
 }
 
-.pp--permission--form.pp--permission {
+.pp--role--form.pp--role {
     margin-bottom: 0;
     border-radius: 0;
 }

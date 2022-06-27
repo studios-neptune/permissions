@@ -5,7 +5,8 @@ namespace Neptune\Domains\Permissions\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Neptune\Domains\Permissions\Commands\PermissionSyncCommand;
+use Neptune\Domains\Permissions\Commands\RoleSeedCommand;
+use Neptune\Domains\Permissions\Commands\PermissionSeedCommand;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
@@ -43,7 +44,8 @@ class PermissionsServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                PermissionSyncCommand::class,
+                PermissionSeedCommand::class,
+                RoleSeedCommand::class,
             ]);
         }
         //    $this->publishes([
