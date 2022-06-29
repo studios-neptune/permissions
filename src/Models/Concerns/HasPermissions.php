@@ -8,8 +8,9 @@ trait HasPermissions
 {
     public function getPermissionField(): string
     {
-        return 'permissions_meta';
+        return config('neptune-permissions.permissions_field');
     }
+    
     public function getPermissions()
     {
         $permissions = collect(

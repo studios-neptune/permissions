@@ -10,7 +10,8 @@ class UserHasPermissionsTable extends Migration
 
     public function __construct()
     {
-        $this->field = config('neptune-permissions.permissions_field');
+        $Permission = config('neptune-permissions.models.permission');
+        $this->field = (new $Permission)->getPermissionField();
     }
 
     /**

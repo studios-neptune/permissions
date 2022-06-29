@@ -20,11 +20,13 @@ class CreateRolesTable extends Migration
         if (Schema::hasTable(config('neptune-permissions.roles_table'))) {
             return;
         }
-        Schema::create(config('neptune-permissions.roles_table'), function (Blueprint $table) {
+        $Role = config('neptune-permissions.models.role');
+        $field = (new $Role)->getRoleField();
+        Schema::create(config('neptune-permissions.roles_table'), function (Blueprint $table) use ($field) {
             $table->id();
             $table->string('name');
             $table->string('slug')->index();
-            $table->json(config('neptune-permissions.permissions_field'))->nullable();
+            $table->json($field)->nullable();
         });
     }
 

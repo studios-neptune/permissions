@@ -8,7 +8,7 @@ trait HasRoles
 {
     public function getRoleField(): string
     {
-        return 'roles_meta';
+        return config('neptune-permissions.roles_field');
     }
 
     public function getRoles()

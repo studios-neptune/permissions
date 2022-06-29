@@ -14,9 +14,9 @@ use Neptune\Domains\Permissions\Models\Concerns\HasPermissions;
  * @property int id
  * @property string name
  * @property string slug
- * @property array permissions
+ * @property array permissions_meta
  */
-class Role extends Model
+class Role extends Model implements \Neptune\Domains\Permissions\Contracts\Models\HasPermissions
 {
     use HasFactory;
     use HasPermissions;

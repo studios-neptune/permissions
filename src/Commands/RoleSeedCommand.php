@@ -16,7 +16,8 @@ class RoleSeedCommand extends Command
     {
         $Role = config('neptune-permissions.models.role');
         $roles = config('neptune-permissions.roles');
-
+        $roleField = (new $Role())->getPermissionField();
+        
         if ($this->option('sync')) {
             Schema::disableForeignKeyConstraints();
             $Role::truncate();
@@ -25,7 +26,7 @@ class RoleSeedCommand extends Command
                 $Role::create([
                     'slug' => $role['slug'],
                     'name' => $role['name'],
-                    'permissions_meta' => json_encode($role['permissions']),
+                    $roleField => json_encode($role['permissions']),
                 ]);
             }
             Schema::enableForeignKeyConstraints();
@@ -38,7 +39,7 @@ class RoleSeedCommand extends Command
                 'slug' => $role['slug'],
             ], [
                 'name' => $role['name'],
-                'permissions_meta' => json_encode($role['permissions']),
+                $roleField => json_encode($role['permissions']),
             ]);
         }
 

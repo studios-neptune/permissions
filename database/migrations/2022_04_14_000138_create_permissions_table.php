@@ -22,20 +22,6 @@ class CreatePermissionsTable extends Migration
             $table->string('slug')->index();
             $table->string('group')->index()->nullable();
         });
-
-        if (! config('neptune-permissions.has_roles')) {
-            return;
-        }
-
-        if (Schema::hasTable(config('neptune-permissions.roles_table'))) {
-            return;
-        }
-        Schema::disableForeignKeyConstraints();
-        Schema::create(config('neptune-permissions.roles_table'), function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug')->index();
-        });
     }
 
     /**
@@ -46,6 +32,5 @@ class CreatePermissionsTable extends Migration
     public function down()
     {
         Schema::dropIfExists(config('neptune-permissions.permissions_table'));
-        Schema::dropIfExists(config('neptune-permissions.roles_table'));
     }
 }
