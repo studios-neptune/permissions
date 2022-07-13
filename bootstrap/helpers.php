@@ -21,8 +21,8 @@ if (! function_exists('model_name')) {
     {
         return basename(
             Str::of($model)
-            ->replace('\\', '/')
-            ->lower()
+                ->replace('\\', '/')
+                ->lower()
         );
     }
 }

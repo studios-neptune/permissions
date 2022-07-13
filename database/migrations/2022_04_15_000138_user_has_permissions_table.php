@@ -7,11 +7,13 @@ use Illuminate\Database\Migrations\Migration;
 class UserHasPermissionsTable extends Migration
 {
     protected string $field;
+    protected string $table;
 
     public function __construct()
     {
-        $Permission = config('neptune-permissions.models.permission');
-        $this->field = (new $Permission)->getPermissionField();
+        $User = config('neptune-permissions.models.user');
+        $this->field = (new $User())->getPermissionField();
+        $this->table = (new $User())->getTable();
     }
 
     /**
@@ -21,7 +23,7 @@ class UserHasPermissionsTable extends Migration
          */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table($this->table, function (Blueprint $table) {
             $table->json($this->field)->nullable();
         });
     }
@@ -33,7 +35,7 @@ class UserHasPermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table($this->table, function (Blueprint $table) {
             $table->dropColumn($this->field);
         });
     }

@@ -10,7 +10,7 @@ trait HasPermissions
     {
         return config('neptune-permissions.permissions_field');
     }
-    
+
     public function getPermissions()
     {
         $permissions = collect(
