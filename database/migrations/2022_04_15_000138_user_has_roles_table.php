@@ -7,10 +7,12 @@ use Illuminate\Database\Migrations\Migration;
 class UserHasRolesTable extends Migration
 {
   protected string $field;
+  protected string $table;
   
   public function __construct () {
-    $Role = config('neptune-permissions.models.role');
-    $this->field = (new $Role)->getRoleField();
+    $User = config('neptune-permissions.models.user');
+    $this->field = (new $User)->getRoleField();
+    $this->table = (new $User)->getTable();
   }
   
   /**
@@ -19,7 +21,7 @@ class UserHasRolesTable extends Migration
    * @return void
    */
   public function up () {
-    Schema::table('users', function (Blueprint $table) {
+    Schema::table($this->table, function (Blueprint $table) {
       $table->json($this->field)->nullable();
     });
   }
@@ -30,7 +32,7 @@ class UserHasRolesTable extends Migration
    * @return void
    */
   public function down () {
-    Schema::table('users', function (Blueprint $table) {
+    Schema::table($this->table, function (Blueprint $table) {
       $table->dropColumn($this->field);
     });
   }
