@@ -32,8 +32,7 @@ composer require studios-neptune/permissions
 ## Dev
 ```bash
 composer install
-cd tools/php-cs-fixer
-composer install
+composer install --working-dir tools/php-cs-fixer
 ```
 
 ## Requirements
