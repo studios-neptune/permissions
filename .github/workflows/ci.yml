@@ -13,7 +13,7 @@ jobs:
       image: kirschbaumdevelopment/laravel-test-runner:7.4.0
 
     steps:
-     - uses: actions/checkout@v4
+     - uses: actions/checkout@v5
 
      - name: Get Composer Cache Directory
        id: composer-cache
