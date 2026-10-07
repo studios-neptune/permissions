@@ -61,10 +61,10 @@ class PermissionsServiceProvider extends ServiceProvider
     // TODO: extract to laravel-core
     protected function crud(string $prefix, $class)
     {
-        Gate::define("{prefix}.create", [$class, 'create']);
-        Gate::define("{prefix}.viewAny", [$class, 'viewAny']);
-        Gate::define("{prefix}.view", [$class, 'view']);
-        Gate::define("{prefix}.update", [$class, 'update']);
-        Gate::define("{prefix}.delete", [$class, 'delete']);
+        Gate::define("{$prefix}.create", [$class, 'create']);
+        Gate::define("{$prefix}.viewAny", [$class, 'viewAny']);
+        Gate::define("{$prefix}.view", [$class, 'view']);
+        Gate::define("{$prefix}.update", [$class, 'update']);
+        Gate::define("{$prefix}.delete", [$class, 'delete']);
     }
 }
